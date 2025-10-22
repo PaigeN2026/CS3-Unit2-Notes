@@ -64,3 +64,53 @@ print(" ")
 # Shortcut does not work for all column names...
 # print(pokemon_df.Type 1) 
 print(pokemon_df['Type 1'])
+
+print(" ")
+
+# Add a new column 
+pokemon_df['Attack Ration'] = pokemon_df['Attack'] / pokemon_df['Sp. Atk']
+
+# Examples of getting info about a DataFrame
+print(pokemon_df.head(10)) # show first n rows
+
+print(" ")
+
+print(pokemon_df.sample(3)) # show random sample of n rows 
+
+print(" ")
+
+print(pokemon_df.shape) # returns a tuple (rows, cols)
+
+print(" ")
+
+print(pokemon_df.columns) # returns a list of column headers
+
+print(" ")
+
+print(pokemon_df.info()) # shows non-null count & dtypes 
+
+print(" ")
+
+print(pokemon_df.describe()) # mean, std, min, max
+
+print(" ")
+
+print(pokemon_df['Defense'].describe()) # stats for a specific col
+
+print(" ")
+
+print(pokemon_df['Type 1'].value_counts()) # frequency of value counts 
+
+print(" ")
+
+# How to locate specific rows
+print(pokemon_df.loc[4]) # gives you charmander
+
+print(" ")
+
+# groupby function helps you isolate groups of entries
+print(pokemon_df.groupby('Type 1')[['HP', 'Speed']].mean())
+
+print(" ")
+
+print(pokemon_df.groupby('Type 1').size().sort_values(ascending=False)) # Similar to value_counts
