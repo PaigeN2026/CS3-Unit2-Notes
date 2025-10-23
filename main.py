@@ -113,4 +113,52 @@ print(pokemon_df.groupby('Type 1')[['HP', 'Speed']].mean())
 
 print(" ")
 
-print(pokemon_df.groupby('Type 1').size().sort_values(ascending=False)) # Similar to value_counts
+# Similar to value_counts
+print(pokemon_df.groupby('Type 1').size().sort_values(ascending=False)) 
+
+print(" ")
+
+# Average combined stats by generation
+pokemon_df['Total'] = pokemon_df[['HP', 'Attack', 'Defense', 'Speed']].sum(axis=1)
+print(pokemon_df['Total'])
+
+print(" ")
+
+#Which generation has the strongest pokemon?
+print(pokemon_df.groupby('Generation')['Total'].mean()) 
+
+print(" ")
+
+# Copare legendary pokemon to non-legendary
+print(pokemon_df.groupby('Legendary')['Total'].mean())
+
+print(" ")
+
+# CONDITIONAL FILTERING
+
+# Select Pokemon with HP greater than 100
+# Pulling ROWS (entries) where the value in the 'HP' COLUMN > 100
+subset1 = pokemon_df[pokemon_df['HP'] > 100]
+
+# Select Poison-type
+subset2 = pokemon_df[pokemon_df['Type 1'] == 'Poison']
+print(subset2)
+
+print(" ")
+
+# Compound operators -> and is &, or is | for Pandas
+# First condition: poisin pokemon that are not also flying type
+# Second condition: AND before gen 5
+subset3 = subset2[(subset2['Type 2'] != 'Flying') & (subset2['Generation'] < 5)]
+print(subset3)
+
+print(" ")
+
+# Select pokemon whose name contains 'Mega
+subset4 = pokemon_df[pokemon_df['Name'].str.contains('Mega')]
+print(subset4)
+
+# Exclude Legendary Pokemon
+subset5 = pokemon_df[pokemon_df['Legendary'] == False]
+# OR you could do the same thing like this:
+subset6 = pokemon_df[~pokemon_df['Legendary']]
